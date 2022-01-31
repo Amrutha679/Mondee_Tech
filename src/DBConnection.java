@@ -5,7 +5,7 @@ import java.sql.Statement;
 
 public class DBConnection {
 	public static void main(String args[]) throws ClassNotFoundException, SQLException {
-		Class.forName("com.mysql.jdbc.Driver");
+		Class.forName("com.mysql.cj.jdbc.Driver");
 		
 		String url = "jdbc:mysql://localhost:3306/college";
 		String username = "Amrutha";
@@ -19,7 +19,7 @@ public class DBConnection {
 		int x =st.executeUpdate("insert into student values(105,'Keerthi','civil',490)");
 		
 		if(x!=0) {
-			System.out.println("Record inserted!!");
+			System.out.println("Record inserted!");
 		}
 	}
 }
