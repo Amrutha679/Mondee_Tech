@@ -5,10 +5,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
 
-class DataBase{
-	Scanner s = new Scanner(System.in);
+public class EmployeeDataBase {
 	
-	void insert(Statement st) throws SQLException {
+	static Scanner s = new Scanner(System.in);
+	
+	static void insert(Statement st) throws SQLException {
 		
 		System.out.println("Enter eid,ename,salary");
 		int id = s.nextInt();
@@ -19,7 +20,7 @@ class DataBase{
 			System.out.println("Record Inserted");
 		}
 	}
-	void delete(Statement st) throws SQLException {
+	static void delete(Statement st) throws SQLException {
 		System.out.println("Enter the eid you want to delete :");
 		int eid = s.nextInt();
 		int x = st.executeUpdate("delete from employee where id = "+eid+" ");
@@ -27,25 +28,23 @@ class DataBase{
 			System.out.println("Record Deleted");
 		}
 	}
-	void select(Statement st) throws SQLException {
+	static void select(Statement st) throws SQLException {
 		
 		ResultSet rs = st.executeQuery("select * from employee");
 		while(rs.next()) {
 			System.out.println(rs.getInt(1)+" "+rs.getString(2)+" "+rs.getInt(3));
 		}	
 	}
-	void update(Statement st) throws SQLException {
+	static void update(Statement st) throws SQLException {
 		
 		int x = st.executeUpdate("update employee set salary = salary+ "+2000+"");
 		if(x != 0) {
 			System.out.println("Record Updated");
 		}
 	}
-}
-public class EmployeeDataBase {
+
 	public static void main(String args[]) throws ClassNotFoundException, SQLException {
-		
-		DataBase obj = new DataBase();
+	
 		
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		
@@ -61,16 +60,16 @@ public class EmployeeDataBase {
 			int num = sc.nextInt();
 			switch(num) {
 			case 1 :
-				obj.insert(st);
+				insert(st);
 				break;
 			case 2:
-				obj.update(st);
+				update(st);
 				break;
 			case 3 :
-				obj.delete(st);
+				delete(st);
 				break;
 			case 4:
-				obj.select(st);
+				select(st);
 				break;
 			default:
 				System.out.println("exit");
